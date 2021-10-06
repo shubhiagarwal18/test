@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORM</title>
+
+    
+    <!-- bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <style>
+      body{
+        margin:0;
+        padding:0;
+      }
+        .outer-container{
+            
+            flex-direction: column;
+            background: linear-gradient(310deg, #5823fb, #9058bd, #24b2fb, #24fba8);
+            background-size: 600% 600%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: all 0.3s ease-in-out;
+            animation: oscillateBG 10s ease infinite;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+
+        @keyframes oscillateBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+    <style>
+        @import url("https://rsms.me/inter/inter.css");
+:root {
+  --color-light: white;
+  --color-dark: #212121;
+  --color-signal: #fab700;
+  --color-background: var(--color-light);
+  --color-text: var(--color-dark);
+  --color-accent: var(--color-signal);
+  --size-bezel: .5rem;
+  --size-radius: 4px;
+  line-height: 1.4;
+  font-family: "Inter", sans-serif;
+  font-size: calc(.6rem + .4vw);
+  color: var(--color-text);
+  background: var(--color-background);
+  font-weight: 300;
+  padding: 0 calc(var(--size-bezel) * 3);
+}
+
+h1, h2, h3 {
+  font-weight: 900;
+}
+
+mark {
+  background: var(--color-accent);
+  color: var(--color-text);
+  font-weight: bold;
+  padding: 0 0.2em;
+}
+
+.card {
+  background: var(--color-background);
+  padding: calc(4 * var(--size-bezel));
+  margin-top: calc(4 * var(--size-bezel));
+  border-radius: var(--size-radius);
+  border: 3px solid var(--color-shadow, currentColor);
+  box-shadow: 0.5rem 0.5rem 0 var(--color-shadow, currentColor);
+}
+
+
+.card *:first-child {
+  margin-top: 0;
+}
+
+.l-design-widht {
+  max-width: 40rem;
+  padding: 1rem;
+}
+
+.input {
+  position: relative;
+}
+.input__label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: calc(var(--size-bezel) * 0.75) calc(var(--size-bezel) * .5);
+  margin: calc(var(--size-bezel) * 0.75 + 3px) calc(var(--size-bezel) * .5);
+  background: pink;
+  white-space: nowrap;
+  transform: translate(0, 0);
+  transform-origin: 0 0;
+  background: var(--color-background);
+  transition: transform 120ms ease-in;
+  font-weight: bold;
+  line-height: 1.2;
+}
+.input__field {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border: 3px solid currentColor;
+  padding: calc(var(--size-bezel) * 1.5) var(--size-bezel);
+  color: currentColor;
+  background: transparent;
+  border-radius: var(--size-radius);
+}
+.input__field:not(:-moz-placeholder-shown) + .input__label {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: var(--color-accent);
+}
+.input__field:not(:-ms-input-placeholder) + .input__label {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: var(--color-accent);
+}
+.input__field:focus + .input__label, .input__field:not(:placeholder-shown) + .input__label {
+  transform: translate(0.25rem, -65%) scale(0.8);
+  color: var(--color-accent);
+}
+
+.button-group {
+  margin-top: calc(var(--size-bezel) * 2.5);
+}
+
+button {
+  color: currentColor;
+  padding: var(--size-bezel) calc(var(--size-bezel) * 2);
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--size-radius);
+  font-weight: 900;
+}
+button[type=reset] {
+  background: var(--color-background);
+  font-weight: 200;
+}
+
+button + button {
+  margin-left: calc(var(--size-bezel) * 2);
+}
+
+
+
+.hidden {
+  display: none;
+}
+
+    </style>
+</head>
+<body>
+<div class="container-fluid outer-container">
+  <div class="row" style="width: 60%;height: auto;">
+    <div class="col-md-12">
+      <div class="inner-container">
+        <form id = "form_id" method = "POST" action = "{% url 'save' %}">
+            {% csrf_token %}
+          <div class="card">
+              <center><h2>Django Quiz</h2></center>
+              <label class="input mt-3">
+                  <input class="input__field" name= "name" type="text" placeholder=" " />
+                  <span class="input__label">Enter Full Name</span>
+              </label>
+
+              <label class="input mt-3">
+                <input class="input__field" name= "email" type="text" placeholder=" " />
+                <span class="input__label">Enter Email Adress</span>
+              </label>
+  
+              <h5 class="mt-3"><b>Select Gender</b></h5>
+              <label class="input">
+                <!-- <input class="input__field" type="text" placeholder=" " /> -->
+                <input type="radio" value="male" name="gender"></input>
+                <span>Male</span>
+                <input type="radio" value="Female" name="gender"></input>
+                <span>Female</span>
+                <input type="radio" value="Others" name="gender"></input>
+                <span>Other</span>
+                
+            </label>
+  
+            <label class="input mt-4">
+                <input class="input__field" name="image" type="file" placeholder="" accept="image/*" />
+                <span class="input__label">Select File</span>
+            </label>
+  
+              <label class="input mt-4">
+                <input class="input__field" name="issue" type="text" placeholder=" " />
+                  <!-- <textarea class="input__field"></textarea> -->
+                  <span class="input__label">Enter Message</span>
+              </label>
+              <div class="button-group">
+                  <button type="submit" id="Submit">Submit</button>
+                  <button type="reset">Reset</button>
+              </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+
+  </div>
+    
+    
+</div>    
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('input').on("focus",function(){
+      $(this).css({"box-shadow":"none"});
+    });
+  });
+
+    let timer;
+
+document.addEventListener('input', e => {
+  const el = e.target;
+
+  if (el.matches('[data-color]')) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      document.documentElement.style.setProperty(`--color-${el.dataset.color}`, el.value);
+    }, 100);
+  }
+});
+
+</script>
+
+<script>
+    $("#submit").on("submit", function(e){
+        e.preventDefault();
+        swal({title: "Success", text: "User Added Successfully!! An Email is delivered to your registered email adress.", type:
+            "success"}, function(){
+
+            });
+    });
+
+</script>
+</body>
+</html>

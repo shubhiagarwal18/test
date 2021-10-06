@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+
+    <style>
+        
+h1{
+  font-size: 30px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 15px;
+}
+table{
+  width:100%;
+  table-layout: fixed;
+}
+.tbl-header{
+  background-color: rgba(255,255,255,0.3);
+ }
+.tbl-content{
+  height:auto;
+  overflow-x:auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 0.3rem 1rem;
+  box-shadow:5px 5px 10px rgba(0,0,0,0.3);
+}
+th{
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  color: #fff;
+  text-transform: uppercase;
+}
+td{
+  padding: 15px;
+  text-align: left;
+  vertical-align:middle;
+  font-weight: 300;
+  font-size: 12px;
+  color: #fff;
+  border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+
+
+/* demo styles */
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+body{
+  background: linear-gradient(310deg, #5823fb, #9058bd, #24b2fb, #24fba8);
+  background-size: 600% 600%;
+  transition: background 0.3s ease-in-out;
+  animation: oscillateBG 10s ease infinite;
+  font-family: 'Roboto', sans-serif;
+}
+@keyframes oscillateBG {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+section{
+  margin: 50px;
+}
+
+
+/* follow me template */
+.made-with-love {
+  margin-top: 40px;
+  padding: 10px;
+  clear: left;
+  text-align: center;
+  font-size: 10px;
+  font-family: arial;
+  color: #fff;
+}
+.made-with-love i {
+  font-style: normal;
+  color: #F50057;
+  font-size: 14px;
+  position: relative;
+  top: 2px;
+}
+.made-with-love a {
+  color: #fff;
+  text-decoration: none;
+}
+.made-with-love a:hover {
+  text-decoration: underline;
+}
+
+
+/* for custom scrollbar for webkit browser*/
+
+::-webkit-scrollbar {
+    width: 6px;
+} 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+} 
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+}
+
+
+    </style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <section>
+        <!--for demo wrap-->
+        <div class="row">
+          <div class="col-4"></div>
+          <div class="col-4 text-center">
+            <h1>Registered Data</h1>
+          </div>
+          <div class="col-4 text-right">
+            <button id="export" class="btn btn-success ml-auto">EXPORT CSV</button>
+          </div>
+        </div>
+         
+        <!-- <div class="tbl-header">
+          <table id="data" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+              <tr>
+                <th>Sr.No.</th>
+                <th>Name</th>
+                <th>Email Adress</th>
+                <th>Gender</th>
+                <th>Issue</th>
+                <th>Image</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            
+          </table>
+        </div> -->
+        <div class="tbl-content">
+          <table id="table_id" cellpadding="0" cellspacing="0" border="0">
+            <thead>
+              <tr>
+                <th>Sr.No.</th>
+                <th>Name</th>
+                <th>Email Adress</th>
+                <th>Gender</th>
+                <th>Issue</th>
+                <th>Image</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="data">
+            </tbody>
+          </table>
+        </div>
+      </section>
+     
+
+
+</script>
+<script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'table2csv.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  $(document).on("ready", function () {
+      $('#table_id').DataTable();
+  });
+
+
+    $(window).on("load resize ", function() {
+        var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+        $('.tbl-header').css({'padding-right':scrollWidth});
+    }).resize();
+</script>
+
+<script>
+  $(document).ready(function () {
+     $.ajax({             // create an AJAX call...
+      type: 'GET',
+      url: 'view',
+      success: function (response) {
+           var cnt=1;
+        var result = '';
+        // Display the returned data in browser
+        var data=response["user_data"]
+        console.log(data)
+        for (var i = 0; i < data.length; i++) {
+            if(data[1]['name'] == data){
+                alert("Name already exists !!")
+            }
+
+            else{
+
+         result = result + '<tr><td>'+cnt+'</td><td>'+data[i]['name']+'</td><td>'+data[i]['email']+'</td><td>'+data[i]['gender']+'</td><td>'+data[i]['issue']+'</td><td>'+data[i]['image']+'</td><td><button class="del btn" style="background-color:tomato;color:white"><i class="fa fa-trash" onclick="Delete_me('+data[i]['id']+')"></i></button><a href="/media/'+data[i]["image"]+'" class="del btn ml-3" style="background-color:purple;color:white" download><i class="fas fa-file-download" onclick=""></i></a></td></tr>';
+         cnt = cnt+1;
+
+        }
+        }
+          $('#data').append(result);
+          $('#table_id').DataTable();
+
+      }
+      });
+
+  });
+</script>
+
+<script>
+
+function Delete_me(id){
+	URl=$.get("/delete?id="+id,function(response) {
+		if(response.status==1){
+
+			swal({title: "Success", text: "Data Deleted Successfully", type:
+"success"}).then(function(){
+   window.location.reload();
+   }
+);
+           }else{
+           		swal("Something went Wrong!...")
+           }
+	});
+}
+
+
+</script>
+
+<script>
+  $('#export').on('click', function(){
+    $('#table_id').first().table2csv();
+  })
+</script>
+
+</body>
+</html>
